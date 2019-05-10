@@ -1,4 +1,4 @@
-﻿// set up SVG for D3
+// set up SVG for D3
 //const width = window.innerWidth - 200;
 const contWidth = $('#graphArea').width();
 const width = contWidth - 15;
@@ -134,21 +134,20 @@ function restart() {
   // remove old links
   path.exit().remove();
 
-	path.enter().append('svg:text')
+  path.enter().append('svg:text')
     .attr('class', 'link-weight')
-		.attr('dy', 15)
-		.attr('x', (d) => d.target.x)
-		.attr('y', (d) => d.target.y)
-		/*.append('textPath')
+    .attr('dy', 15)
+    .attr('x', 4)
+    .append('textPath')
     .attr('xlink:href',(d) => '#link'+d.id)
-		.attr('text-anchor', 'middle')
-		.attr('startOffset', '50%') */
+    .attr('text-anchor', 'middle')
+    .attr('startOffset', '50%')
     .text((d) => d.weight);
 
   // add new links
   path = path.enter().append('svg:path')
     .attr('class', 'link')
-		.attr('id', (d) => 'link'+d.id)
+    .attr('id', (d) => 'link'+d.id)
     .classed('selected', (d) => d === selectedLink)
     .style('marker-start', (d) => d.left ? 'url(#start-arrow)' : '')
     .style('marker-end', (d) => d.right ? 'url(#end-arrow)' : '')
