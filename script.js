@@ -64,7 +64,7 @@ svg.append('svg:defs').append('svg:marker')
     .attr('orient', 'auto')
   .append('svg:path')
     .attr('d', 'M0,-5L10,0L0,5')
-    .attr('fill', '#000');
+    .attr('fill', '#d65c5c');
 
 svg.append('svg:defs').append('svg:marker')
     .attr('id', 'start-arrow')
@@ -75,7 +75,7 @@ svg.append('svg:defs').append('svg:marker')
     .attr('orient', 'auto')
   .append('svg:path')
     .attr('d', 'M10,-5L0,0L10,5')
-    .attr('fill', '#000');
+    .attr('fill', '#d65c5c');
 
 // line displayed when dragging new nodes
 const dragLine = svg.append('svg:path')
@@ -266,7 +266,7 @@ function restart() {
     .force('link').links(links);
 
   force.alphaTarget(0).restart();
-	settings();
+  settings();
 }
 
 function mousedown() {
@@ -384,19 +384,20 @@ function keyup() {
 }
 
 function settings() {
-	for (let n in nodes) {
-		d3.select('#setsArea')
-			.append('input')
-			.attr('class', 'custom-range slider' + nodes[n].id)
-			.attr('type', 'range')
-			.attr('min', '0')
-			.attr('max', '10')
-			.property('value', nodes[n].weight)
-			.on('input', function input() {
-				nodes[n].weight = this.value;
-				svg.selectAll('text.node-weight').text(function(d) { return d.weight });
-			});
-	}
+  d3.select('#setsArea').selectAll('input').remove();
+  for (let n in nodes) {
+    d3.select('#setsArea')
+      .append('input')
+      .attr('class', 'custom-range slider' + nodes[n].id)
+      .attr('type', 'range')
+      .attr('min', '0')
+      .attr('max', '10')
+      .property('value', nodes[n].weight)
+      .on('input', function input() {
+        nodes[n].weight = this.value;
+        svg.selectAll('text.node-weight').text(function(d) { return d.weight });
+      });
+  }
 }
 
 // app starts here
