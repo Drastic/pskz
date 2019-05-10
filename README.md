@@ -1,2 +1,2 @@
-# pzks
-PZKS
+# pskz
+PSKZ
