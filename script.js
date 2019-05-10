@@ -384,10 +384,13 @@ function keyup() {
 }
 
 function settings() {
-  d3.select('#setsArea').selectAll('input').remove();
+  let sets = d3.select('#setsArea');
+  sets.html('');
   for (let n in nodes) {
-    d3.select('#setsArea')
-      .append('input')
+    sets.append('span')
+      .attr('class', 'badge badge-primary')
+      .text('node ' + nodes[n].id);
+    sets.append('input')
       .attr('class', 'custom-range slider' + nodes[n].id)
       .attr('type', 'range')
       .attr('min', '0')
@@ -396,6 +399,21 @@ function settings() {
       .on('input', function input() {
         nodes[n].weight = this.value;
         svg.selectAll('text.node-weight').text(function(d) { return d.weight });
+      });
+  }
+  for (let l in links) {
+    sets.append('span')
+      .attr('class', 'badge badge-primary')
+      .text('link ' + links[l].id);
+    sets.append('input')
+      .attr('class', 'custom-range slider' + links[l].id)
+      .attr('type', 'range')
+      .attr('min', '0')
+      .attr('max', '10')
+      .property('value', links[l].weight)
+      .on('input', function input() {
+        links[l].weight = this.value;
+        svg.selectAll('text.link-weight').selectAll('textPath').text((d) =>  d.weight );
       });
   }
 }
