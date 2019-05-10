@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">ПЗКС</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Граф задачі
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Новий</a>
+          <a class="dropdown-item" href="#">Відкрити</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Зберегти</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Граф КС
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Новий</a>
+          <a class="dropdown-item" href="#">Відкрити</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Зберегти</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Моделювання
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Параметри процесорів</a>
+          <a class="dropdown-item" href="#">Діаграма Ганта</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Статистика</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Допомога</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Пошук">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container-fluid">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Граф задачі</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Граф системи</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="true">Contact</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+			<canvas id="graphTask" width="800" height="300"></canvas>
+		</div>
+		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+			<canvas id="graphSystem" width="800" height="300"></canvas>
+		</div>
+		<div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+			<div class="row">
+				<div class="col-sm-10">
+					<div id="graphArea"></div>
+				</div>
+				<div class="col-sm-2">
+					<div>
+						<div class="input-group mb-3" id="setsArea">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="node-label1">ID</span>
+							</div>
+							<input type="text" class="form-control" placeholder="1" aria-label="weight" aria-describedby="node-label1">
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var c1 = document.getElementById("graphTask");
+var ctx1 = c1.getContext("2d");
+ctx1.canvas.width  = window.innerWidth - 50;
+ctx1.canvas.height = window.innerHeight - 200;
+ctx1.beginPath();
+ctx1.arc(95,50,40,0,2*Math.PI);
+ctx1.stroke();
+var c2 = document.getElementById("graphSystem");
+var ctx2 = c2.getContext("2d");
+ctx2.canvas.width  = window.innerWidth - 50;
+ctx2.canvas.height = window.innerHeight - 200;
+</script> 
+
+<script src="jquery-3.3.1.slim.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="d3.v5.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

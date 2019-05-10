@@ -1,0 +1,81 @@
+﻿html, body {
+  width:  100%;
+  height: 100%;
+  margin: 0;
+}
+
+#graphTask {
+	border:2px solid #d3d3d3;
+	background-color: oldlace;
+	}
+
+#graphSystem {
+	border:2px solid #d3d3d3;
+	background-color: oldlace;
+	}
+
+.container-fluid {
+	margin-top:5px;
+	}
+
+#graphArea {
+	border:1px solid #d3d3d3;
+	background-color: oldlace;
+	}
+
+svg {
+  background-color: oldlace;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+svg:not(.active):not(.ctrl) {
+  cursor: crosshair;
+}
+
+path.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 4px;
+  cursor: default;
+}
+
+svg:not(.active):not(.ctrl) path.link {
+  cursor: pointer;
+}
+
+path.link.selected {
+  stroke-dasharray: 10,2;
+}
+
+path.link.dragline {
+  pointer-events: none;
+}
+
+path.link.hidden {
+  stroke-width: 0;
+}
+
+circle.node {
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+circle.node.reflexive {
+  stroke: #000 !important;
+  stroke-width: 2.5px;
+}
+
+text {
+  font: 12px sans-serif;
+  pointer-events: none;
+}
+
+text.id {
+  text-anchor: middle;
+  font-weight: bold;
+}
