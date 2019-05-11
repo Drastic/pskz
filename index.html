@@ -89,6 +89,7 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 </div>
@@ -103,6 +104,8 @@
         </button>
       </div>
       <div class="modal-body">
+        <div id="modalerr" class="alert alert-danger" role="alert" hidden>
+        </div>
         <div class="row mb-3">
           <label for="gen1" class="col col-form-label">Діапазон задач</label>
           <div class="col input-group">
@@ -128,14 +131,14 @@
         <div class="row mb-3">
           <label for="gen5" class="col col-form-label">Діапазон даних</label>
           <div class="col input-group">
-            <input type="text" class="form-control" id="gen5" value="0">
+            <input type="text" class="form-control" id="gen5" value="">
             <input type="text" class="form-control" id="gen6" value="0">
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-        <button type="button" class="btn btn-primary">Генерувати</button>
+        <button type="button" class="btn btn-primary" onclick="generate();">Генерувати</button>
       </div>
     </div>
   </div>
@@ -159,6 +162,7 @@ ctx2.canvas.height = window.innerHeight - 200;
 <script src="bootstrap.min.js"></script>
 <script src="d3.v5.min.js"></script>
 <script src="script.js"></script>
+<script src="generate.js"></script>
 
 </body>
 </html>
