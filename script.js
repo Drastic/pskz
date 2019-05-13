@@ -48,7 +48,7 @@ const drag = d3.drag()
     d.fy = d3.event.y;
   })
   .on('end', (d) => {
-    if (!d3.event.active) force.alphaTarget(0);
+    if (!d3.event.active) force.alphaTarget(0.3);
 
     d.fx = null;
     d.fy = null;
@@ -123,6 +123,7 @@ function tick() {
 
 // update graph (called when needed)
 function restart() {
+  console.log(nodes); console.log(links);
   // path (link) group
   path = path.data(links);
 
@@ -261,11 +262,9 @@ function restart() {
   circle = g.merge(circle);
 
   // set the graph in motion
-  force
-    .nodes(nodes)
-    .force('link').links(links);
+  force.nodes(nodes).force('link').links(links);
 
-  force.alphaTarget(0).restart();
+  force.alphaTarget(0.3).restart();
   settings();
 }
 
@@ -391,14 +390,16 @@ function settings() {
       .attr('class', 'badge badge-primary')
       .text('node ' + nodes[n].id);
     sets.append('input')
-      .attr('class', 'custom-range slider' + nodes[n].id)
-      .attr('type', 'range')
+      .attr('class', 'form-control custom-range slider' + nodes[n].id)
+      .attr('type', 'number')
       .attr('min', '0')
-      .attr('max', '10')
+      .attr('max', '100')
+      .style('background-color', colors(nodes[n].id))
+      .style('width', '100%')
       .property('value', nodes[n].weight)
       .on('input', function input() {
         nodes[n].weight = this.value;
-        svg.selectAll('text.node-weight').text(function(d) { return d.weight });
+        svg.selectAll('text.node-weight').text(function (d) { return d.weight; } );
       });
   }
   for (let l in links) {
@@ -406,10 +407,10 @@ function settings() {
       .attr('class', 'badge badge-primary')
       .text('link ' + links[l].id);
     sets.append('input')
-      .attr('class', 'custom-range slider' + links[l].id)
-      .attr('type', 'range')
+      .attr('class', 'form-control slider' + links[l].id)
+      .attr('type', 'number')
       .attr('min', '0')
-      .attr('max', '10')
+      .attr('max', '100')
       .property('value', links[l].weight)
       .on('input', function input() {
         links[l].weight = this.value;

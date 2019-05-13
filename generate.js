@@ -71,6 +71,7 @@ function generate() {
   nodes.splice(0, nodes.length);
   links.splice(0, links.length);
   lastNodeId = 0; lastLinkId = 0;
+  restart();
 
   let sumOfNodeWeight = 0;
 
@@ -101,7 +102,7 @@ function generate() {
 
     let startNode = nodes[(Math.trunc(Math.random() * nodes.length))];
     let endNode = null; let countr = 0;
-    while (endNode == null && shouldAddToList && countr < 20) {
+    while (endNode == null && shouldAddToList) {
       endNode = nodes[(Math.trunc(Math.random() * nodes.length))];
 
       for (let l in links) {
@@ -119,7 +120,7 @@ function generate() {
           line.source = startNode;
           line.target = endNode;
           links.push(line);
-          console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
+          // console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
         }
       }
       countr++;
@@ -136,7 +137,7 @@ function getMatrix() {
     matrix[i] = [];
   }
   for (let l in links) {
-    console.log( l + ' duh ' +'_'+ links.length +'_'+ nodes.indexOf(l.target) +'_'+ nodes.indexOf(l.source) );
+    // console.log( l + ' duh ' +'_'+ links.length +'_'+ nodes.indexOf(l.target) +'_'+ nodes.indexOf(l.source) );
     //matrix[nodes.indexOf(l.source)][nodes.indexOf(l.target)] = 1;
     //matrix[nodes.indexOf(l.target)][nodes.indexOf(l.source)] = 1;
   }
