@@ -114,13 +114,13 @@ function generate() {
       }
       if (shouldAddToList) {
         let matrix = getMatrix();
-        if (hasRoute(matrix, nodes.indexOf(startNode), nodes.indexOf(endNode), true)) {
+        if (hasRoute(matrix, nodes.indexOf(startNode), nodes.indexOf(endNode), false)) {
           endNode = null;
         } else {
           line.source = startNode;
           line.target = endNode;
           links.push(line);
-          // console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
+          console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
         }
       }
       countr++;

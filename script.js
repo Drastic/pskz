@@ -161,6 +161,12 @@ function restart() {
       selectedNode = null;
       restart();
     })
+    .on('mouseover', (d) => {
+      d3.select('div.link'+d.id).style('border', '1px solid black');
+    })
+    .on('mouseout', (d) => {
+      d3.select('div.link'+d.id).style('border', '0px');
+    })
     .merge(path);
 
   // circle (node) group
@@ -385,29 +391,38 @@ function keyup() {
 function settings() {
   let sets = d3.select('#setsArea');
   sets.html('');
+  let setsacc = sets.append('div').attr('class','accordion').append('div').attr('class','card');
+  setsacc.append('div').attr('class', 'card-header').text('Nodes');
   for (let n in nodes) {
-    sets.append('span')
-      .attr('class', 'badge badge-primary')
+    let setsnodes = setsacc.append('div').attr('class', 'card-body').append('div').attr('class', 'input-group mb-1');
+    setsnodes.append('div')
+      .attr('class', 'input-group-prepend')
+      .append('span').attr('class', 'input-group-text')
+      .style('background-color', colors(nodes[n].id))
       .text('node ' + nodes[n].id);
-    sets.append('input')
-      .attr('class', 'form-control slider')
+    setsnodes.append('input')
       .attr('type', 'number')
+      .attr('class', 'form-control')
       .attr('min', '0')
       .attr('max', '100')
-      .style('background-color', colors(nodes[n].id))
       .property('value', nodes[n].weight)
       .on('input', function input() {
         nodes[n].weight = this.value;
         svg.selectAll('text.node-weight').text(function (d) { return d.weight; } );
       });
   }
+  setsacc = sets.append('div').attr('class','accordion').append('div').attr('class','card');
+  setsacc.append('div').attr('class', 'card-header').text('Links');
   for (let l in links) {
-    sets.append('span')
-      .attr('class', 'badge badge-primary')
-      .text('link ' + links[l].id);
-    sets.append('input')
-      .attr('class', 'form-control slider')
+    let setslinks = setsacc.append('div').attr('class', 'card-body').append('div').attr('class', 'input-group mb-1 link' + links[l].id);
+    setslinks.append('div')
+      .attr('class', 'input-group-prepend')
+      .append('span').attr('class', 'input-group-text')
+      .style('background-color', '#d65c5c')
+      .text('link ' + links[l].source.id +'-'+ links[l].target.id);
+    setslinks.append('input')
       .attr('type', 'number')
+      .attr('class', 'form-control')
       .attr('min', '0')
       .attr('max', '100')
       .property('value', links[l].weight)
