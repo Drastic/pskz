@@ -390,12 +390,11 @@ function settings() {
       .attr('class', 'badge badge-primary')
       .text('node ' + nodes[n].id);
     sets.append('input')
-      .attr('class', 'form-control custom-range slider' + nodes[n].id)
+      .attr('class', 'form-control slider')
       .attr('type', 'number')
       .attr('min', '0')
       .attr('max', '100')
       .style('background-color', colors(nodes[n].id))
-      .style('width', '100%')
       .property('value', nodes[n].weight)
       .on('input', function input() {
         nodes[n].weight = this.value;
@@ -407,7 +406,7 @@ function settings() {
       .attr('class', 'badge badge-primary')
       .text('link ' + links[l].id);
     sets.append('input')
-      .attr('class', 'form-control slider' + links[l].id)
+      .attr('class', 'form-control slider')
       .attr('type', 'number')
       .attr('min', '0')
       .attr('max', '100')

@@ -80,3 +80,10 @@ text {
 
 text.id {
 }
+
+input.slider {
+  padding: 0px;
+  margin: 0px;
+  font-weight: bold;
+  text-anchor: middle;
+}
