@@ -123,7 +123,7 @@ function tick() {
 
 // update graph (called when needed)
 function restart() {
-  console.log(nodes); console.log(links);
+  //console.log(nodes); console.log(links);
   // path (link) group
   path = path.data(links);
 
@@ -443,6 +443,40 @@ function settings() {
         svg.selectAll('text.link-weight').selectAll('textPath').text((d) =>  d.weight );
       });
   }
+}
+
+function save() {
+  
+  let coln = ['id', 'weight', 'index'];
+  let coll = ['id', 'weight', 'index', 'left', 'right', 'source', 'target'];
+  // let result = cols.join(',') + '\n';
+  let result = '';
+  
+  for (let n of nodes) {
+    let tmp = ['node'];
+    for (const c of coln) {
+      tmp.push(n[c]);
+    }
+    result += tmp.join(',') + '\n';
+  }
+  for (let l of links) {
+    let tmp = ['link'];
+    for (const c of coll) {
+      tmp.push(l[c]);
+    }
+    result += tmp.join(',') + '\n';
+  }
+  
+  let csvContent = 'data:text/csv;charset=utf-8,' 
+    + result;
+  
+  var encodedUri = encodeURI(csvContent);
+  var link = document.createElement('a');
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', 'my_data.csv');
+  document.body.appendChild(link); // Required for FF
+
+  link.click();
 }
 
 // app starts here

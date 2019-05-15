@@ -97,7 +97,7 @@ function generate() {
     sumOfLineWeight -= nextLineWeight;
 
     let shouldAddToList = true;
-    let line = { id: ++lastLinkId, left: false, right: true, weight: 1 };
+    let line = { id: ++lastLinkId, left: true, right: false, weight: 1 };
     line.weight = nextLineWeight;
 
     let startNode = nodes[(Math.trunc(Math.random() * nodes.length))];
@@ -112,6 +112,8 @@ function generate() {
           shouldAddToList = false;
         }
       }
+      //console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
+      if (startNode.id < endNode.id) shouldAddToList = false;
       if (shouldAddToList) {
         let matrix = getMatrix();
         if (hasRoute(matrix, nodes.indexOf(startNode), nodes.indexOf(endNode), false)) {
@@ -120,9 +122,9 @@ function generate() {
           line.source = startNode;
           line.target = endNode;
           links.push(line);
-          console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
         }
       }
+      if (countr>1000) break;
       countr++;
     }
   }
