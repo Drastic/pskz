@@ -391,10 +391,16 @@ function keyup() {
 function settings() {
   let sets = d3.select('#setsArea');
   sets.html('');
-  let setsacc = sets.append('div').attr('class','accordion').append('div').attr('class','card');
-  setsacc.append('div').attr('class', 'card-header').text('Nodes');
+  sets.append('button')
+    .attr('class', 'btn btn-primary btn-block mb-1')
+    .attr('data-toggle', 'collapse')
+    .attr('data-target', '#nodes-list')
+    .text('Nodes');
+  sets.append('div')
+    .attr('class', 'card card-body collapse show mb-1')
+    .attr('id','nodes-list');
   for (let n in nodes) {
-    let setsnodes = setsacc.append('div').attr('class', 'card-body').append('div').attr('class', 'input-group mb-1');
+    let setsnodes = sets.select('#nodes-list').append('div').attr('class', 'input-group mb-1');
     setsnodes.append('div')
       .attr('class', 'input-group-prepend')
       .append('span').attr('class', 'input-group-text')
@@ -411,10 +417,16 @@ function settings() {
         svg.selectAll('text.node-weight').text(function (d) { return d.weight; } );
       });
   }
-  setsacc = sets.append('div').attr('class','accordion').append('div').attr('class','card');
-  setsacc.append('div').attr('class', 'card-header').text('Links');
+  sets.append('button')
+    .attr('class', 'btn btn-primary btn-block mb-1')
+    .attr('data-toggle', 'collapse')
+    .attr('data-target', '#links-list')
+    .text('Links');
+  sets.append('div')
+    .attr('class', 'card card-body collapse mb-1')
+    .attr('id','links-list');
   for (let l in links) {
-    let setslinks = setsacc.append('div').attr('class', 'card-body').append('div').attr('class', 'input-group mb-1 link' + links[l].id);
+    let setslinks = sets.select('#links-list').append('div').attr('class', 'input-group mb-1 link' + links[l].id);
     setslinks.append('div')
       .attr('class', 'input-group-prepend')
       .append('span').attr('class', 'input-group-text')
