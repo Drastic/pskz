@@ -462,7 +462,7 @@ function save() {
   for (let l of links) {
     let tmp = ['link'];
     for (const c of coll) {
-      tmp.push(l[c]);
+      (c == 'source' || c == 'target') ? tmp.push(l[c].id) : tmp.push(l[c]);
     }
     result += tmp.join(',') + '\n';
   }
@@ -477,6 +477,58 @@ function save() {
   document.body.appendChild(link); // Required for FF
 
   link.click();
+}
+
+function file() {
+  let cols = ['type', 'id', 'weight', 'index', 'left', 'right', 'source', 'target'];
+  let file = document.getElementById('graph-file').files[0];
+  let reader = new FileReader();
+  reader.onload = function() {
+    nodes.splice(0, nodes.length);
+    links.splice(0, links.length);
+    lastNodeId = 0; lastLinkId = 0;
+    restart();
+    force.alphaTarget(0.3).restart();
+    let lines = this.result.split(/\r\n|\n/);
+    for (let l of lines) {
+      if (l.length < 1) break;
+      l = l.split(',');
+      let obj = {};
+      for (let i = 1; i < l.length; i++) {
+        obj[cols[i]] = l[i];
+      }
+      if (l[0] == 'node') nodes.push(obj);
+      if (l[0] == 'link') links.push(obj);
+    }
+    for (let link of links)
+      for (let node of nodes) {
+        if (link.source == node.id) link.source = node;
+        if (link.target == node.id) link.target = node;
+      }
+  restart();
+  force.alphaTarget(0.3).restart();
+  };
+  reader.readAsText(file);
+}
+
+function newgraph() {
+  let c = confirm('Ви дійсно бажаєте створити новий граф?');
+  if (!c) return;
+  nodes.splice(0, nodes.length);
+  links.splice(0, links.length);
+  lastNodeId = 0; lastLinkId = 0;
+  restart();
+  nodes.push(
+    { id: 1, reflexive: false, weight: 1 },
+    { id: 2, reflexive: true, weight: 1 }
+  );
+  lastNodeId = 2;
+  links.push(
+    { id: 1, source: nodes[0], target: nodes[1], left: false, right: true, weight: 1 }
+  );
+  lastLinkId = 1;
+  restart();
+  force.alphaTarget(0.3).restart();
 }
 
 // app starts here

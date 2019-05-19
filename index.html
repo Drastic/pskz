@@ -18,8 +18,9 @@
           Граф задачі
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Новий</a>
-          <a class="dropdown-item" href="#">Відкрити</a>
+          <a class="dropdown-item" href="#" onclick="newgraph();">Новий</a>
+          <input type="file" id="graph-file" hidden onchange="file();">
+          <a class="dropdown-item" href="#" onclick="document.getElementById('graph-file').click();">Відкрити</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#" onclick="save();">Зберегти</a>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#graphgenModal">Генерування графу задачі</a>
@@ -61,27 +62,32 @@
 <div class="container-fluid">
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Граф задачі</a>
+      <a class="nav-link active" id="gtask-tab" data-toggle="tab" href="#gtask" role="tab" aria-controls="gtask" aria-selected="true">Граф задачі</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Граф системи</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="true">Contact</a>
+      <a class="nav-link" id="gsyst-tab" data-toggle="tab" href="#gsyst" role="tab" aria-controls="gsyst" aria-selected="false">Граф системи</a>
     </li>
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-      <canvas id="graphTask" width="800" height="300"></canvas>
-    </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <canvas id="graphSystem" width="800" height="300"></canvas>
-    </div>
-    <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+    <div class="tab-pane fade show active" id="gtask" role="tabpanel" aria-labelledby="gtask-tab">
       <div class="row">
         <div class="col-sm-10">
           <div id="graphArea"></div>
+        </div>
+        <div class="col-sm-2">
+          <div>
+            <div id="setsArea">
+              <input type="text" class="form-control" placeholder="1" aria-label="weight" aria-describedby="node-label1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="gsyst" role="tabpanel" aria-labelledby="gsyst-tab">
+      <div class="row">
+        <div class="col-sm-10">
+          <div id="sysgraphArea"><canvas id="graphSystem" width="800" height="300"></canvas></div>
         </div>
         <div class="col-sm-2">
           <div>
@@ -146,20 +152,16 @@
 </div>
 
 <script>
-var c1 = document.getElementById("graphTask");
+var c1 = document.getElementById("graphSystem");
 var ctx1 = c1.getContext("2d");
 ctx1.canvas.width  = window.innerWidth - 50;
 ctx1.canvas.height = window.innerHeight - 200;
 ctx1.beginPath();
 ctx1.arc(95,50,40,0,2*Math.PI);
 ctx1.stroke();
-var c2 = document.getElementById("graphSystem");
-var ctx2 = c2.getContext("2d");
-ctx2.canvas.width  = window.innerWidth - 50;
-ctx2.canvas.height = window.innerHeight - 200;
 </script> 
 
-<script src="jquery-3.3.1.slim.min.js"></script>
+<script src="jquery-3.4.1.min.js"></script>
 <script src="bootstrap.min.js"></script>
 <script src="d3.v5.min.js"></script>
 <script src="script.js"></script>
