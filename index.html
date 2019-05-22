@@ -43,19 +43,15 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Параметри процесорів</a>
-          <a class="dropdown-item" href="#">Діаграма Ганта</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modelModal">Діаграма Ганта</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Статистика</a>
+          <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#statsModal">Статистика</a>
         </div>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Допомога</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Пошук" aria-label="Пошук">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button>
-    </form>
   </div>
 </nav>
 
@@ -123,13 +119,13 @@
         <div class="row mb-3">
           <label for="gen3" class="col col-form-label">Кількість задач</label>
           <div class="col input-group">
-            <input type="text" class="col form-control" id="gen3" value="5">
+            <input type="text" class="col form-control" id="gen3" value="10" autofocus>
           </div>
         </div>
         <div class="row mb-3">
           <label for="gen4" class="col col-form-label">Зв'язність графу</label>
           <div class="col input-group">
-            <input type="text" class="col form-control" id="gen4" value="70">
+            <input type="text" class="col form-control" id="gen4" value="40">
             <div class="input-group-append">
               <span class="input-group-text">%</span>
             </div>
@@ -146,6 +142,64 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
         <button type="button" class="btn btn-primary" onclick="generate();">Генерувати</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modelModal" tabindex="-1" role="dialog" aria-labelledby="modelModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Моделювання</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="modelerr" class="alert alert-danger" role="alert" hidden>
+        </div>
+        <div class="row mb-3">
+          <label for="mod1" class="col col-form-label">Алгоритм черги</label>
+          <div class="col input-group">
+            <input type="text" class="form-control" id="mod1" value="1" autofocus>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label for="mod2" class="col col-form-label">Алгоритм призначення</label>
+          <div class="col input-group">
+            <input type="text" class="col form-control" id="mod2" value="1">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-primary" onclick="model();">Моделювати</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Статистика</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="statserr" class="alert alert-danger" role="alert" hidden>
+        </div>
+        <div class="row mb-3">
+          <div class="">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="" id="statsArea">
+          </div>
+        </div>
       </div>
     </div>
   </div>

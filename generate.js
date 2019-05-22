@@ -71,6 +71,7 @@ function generate() {
   nodes.splice(0, nodes.length);
   links.splice(0, links.length);
   lastNodeId = 0; lastLinkId = 0;
+  svg.selectAll('text.link-weight').remove();
   restart();
 
   let sumOfNodeWeight = 0;
@@ -97,7 +98,7 @@ function generate() {
     sumOfLineWeight -= nextLineWeight;
 
     let shouldAddToList = true;
-    let line = { id: ++lastLinkId, left: true, right: false, weight: 1 };
+    let line = { id: ++lastLinkId, left: false, right: true, weight: 1 };
     line.weight = nextLineWeight;
 
     let startNode = nodes[(Math.trunc(Math.random() * nodes.length))];
@@ -113,7 +114,7 @@ function generate() {
         }
       }
       //console.log(startNode.id +'_'+ endNode.id +'_'+ line.id);
-      if (startNode.id < endNode.id) shouldAddToList = false;
+      //if (startNode.id > endNode.id) shouldAddToList = false;
       if (shouldAddToList) {
         let matrix = getMatrix();
         if (hasRoute(matrix, nodes.indexOf(startNode), nodes.indexOf(endNode), false)) {
@@ -137,12 +138,16 @@ function getMatrix() {
   let matrix = [];
   for (let i = 0; i < nodes.length; i++) {
     matrix[i] = [];
+    for (let j = 0; j < nodes.length; j++) {
+      matrix[i][j] = 0;
+    }
   }
-  for (let l in links) {
-    // console.log( l + ' duh ' +'_'+ links.length +'_'+ nodes.indexOf(l.target) +'_'+ nodes.indexOf(l.source) );
-    //matrix[nodes.indexOf(l.source)][nodes.indexOf(l.target)] = 1;
-    //matrix[nodes.indexOf(l.target)][nodes.indexOf(l.source)] = 1;
+  for (let l of links) {
+    //console.log( l + ' duh ' +'_'+ links.length +'_'+ nodes.indexOf(l.target) +'_'+ nodes.indexOf(l.source) );
+    matrix[nodes.indexOf(l.source)][nodes.indexOf(l.target)] = 1;
+    matrix[nodes.indexOf(l.target)][nodes.indexOf(l.source)] = 1;
   }
+  //console.log(matrix);
   return matrix;
 }
 
@@ -170,6 +175,7 @@ function hasRoute(matrix, from, to, isCycle) {
       }
     }
   }
+      //console.log(result +' '+ from +' '+ to);
   return result;
 }
 

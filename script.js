@@ -85,6 +85,7 @@ const dragLine = svg.append('svg:path')
 // handles to link and node element groups
 let path = svg.append('svg:g').selectAll('path');
 let circle = svg.append('svg:g').selectAll('g');
+let label = svg.append('svg:g').selectAll('text');
 
 // mouse event vars
 let selectedNode = null;
@@ -123,7 +124,6 @@ function tick() {
 
 // update graph (called when needed)
 function restart() {
-  //console.log(nodes); console.log(links);
   // path (link) group
   path = path.data(links);
 
@@ -134,16 +134,6 @@ function restart() {
 
   // remove old links
   path.exit().remove();
-
-  path.enter().append('svg:text')
-    .attr('class', 'link-weight')
-    .attr('dy', 15)
-    .attr('x', 4)
-    .append('textPath')
-    .attr('xlink:href',(d) => '#link'+d.id)
-    .attr('text-anchor', 'middle')
-    .attr('startOffset', '50%')
-    .text((d) => d.weight);
 
   // add new links
   path = path.enter().append('svg:path')
@@ -168,6 +158,20 @@ function restart() {
       d3.select('div.link'+d.id).style('border', '0px');
     })
     .merge(path);
+    
+  label = label.data(links, function (d) { return d.id; });
+  label.exit().remove();
+  label.enter().append('svg:text')
+    .attr('class', 'link-weight')
+    .attr('dy', 15)
+    .attr('x', 4)
+    .append('textPath')
+    .attr('xlink:href',(d) => '#link'+d.id)
+    .attr('text-anchor', 'middle')
+    .attr('startOffset', '50%')
+    .text((d) => d.weight);
+    //.merge(path);
+
 
   // circle (node) group
   // NB: the function arg is crucial here! nodes are known by id, not by index!
@@ -244,7 +248,14 @@ function restart() {
       if (link) {
         link[isRight ? 'right' : 'left'] = true;
       } else {
-        links.push({ id: ++lastLinkId, source, target, left: !isRight, right: isRight, weight: 1 });
+        let matrix = getMatrix();
+        if (hasRoute(matrix, nodes.indexOf(source), nodes.indexOf(target), false)) {
+          //endNode = null;
+          alert('Has route!');
+        } else {
+          links.push({ id: ++lastLinkId, source, target, left: !isRight, right: isRight, weight: 1 });
+        }
+
       }
 
       // select new link
