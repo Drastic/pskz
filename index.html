@@ -83,11 +83,11 @@
     <div class="tab-pane fade" id="gsyst" role="tabpanel" aria-labelledby="gsyst-tab">
       <div class="row">
         <div class="col-sm-10">
-          <div id="sysgraphArea"><canvas id="graphSystem" width="800" height="300"></canvas></div>
+          <div id="graphCSArea"></div>
         </div>
         <div class="col-sm-2">
           <div>
-            <div id="setsArea">
+            <div id="setsCSArea">
               <input type="text" class="form-control" placeholder="1" aria-label="weight" aria-describedby="node-label1">
             </div>
           </div>
@@ -205,22 +205,12 @@
   </div>
 </div>
 
-<script>
-var c1 = document.getElementById("graphSystem");
-var ctx1 = c1.getContext("2d");
-ctx1.canvas.width  = window.innerWidth - 50;
-ctx1.canvas.height = window.innerHeight - 200;
-ctx1.beginPath();
-ctx1.arc(95,50,40,0,2*Math.PI);
-ctx1.stroke();
-</script> 
-
 <script src="jquery-3.4.1.min.js"></script>
 <script src="bootstrap.min.js"></script>
 <script src="d3.v5.min.js"></script>
 <script src="script.js"></script>
+<script src="scriptcs.js"></script>
 <script src="generate.js"></script>
-<script src="modeling.js"></script>
 
 </body>
 </html>
