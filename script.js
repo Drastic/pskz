@@ -190,7 +190,7 @@ function restart() {
 
   g.append('svg:circle')
     .attr('class', 'node')
-    .attr('r', 12)
+    .attr('r', 16)
     .style('fill', (d) => (d === selectedNode) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id))
     .style('stroke', (d) => d3.rgb(colors(d.id)).darker().toString())
     .classed('reflexive', (d) => d.reflexive)
@@ -267,11 +267,11 @@ function restart() {
   // show node IDs
   g.append('svg:text')
     .attr('x', 0)
-    .attr('y', 4)
+    .attr('y', 5)
     .attr('class', 'id')
     .text((d) => d.id);
   g.append('svg:text')
-    .attr('x', 20)
+    .attr('x', 24)
     .attr('y', 4)
     .attr('class', 'node-weight')
     .text((d) => d.weight);
